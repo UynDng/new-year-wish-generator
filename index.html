@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        "New Year Wish Generator"
+    </title>
+</head>
+
+<body>
+    <h1>Lunar New Year Wishes</h1>
+
+    <div id="text">
+        Generate your wishes here
+    </div>
+
+    <button id="button">
+        Generate Wish
+    </button>
+
+    <div id="count">
+        Wish Counter: 0
+    </div>
+</body>
+<script>
+    let wishes = [
+        "祝你平安顺遂。",
+        "愿你万事如意。",
+        "心想事成。",
+        "天天好心情。",
+        "事事顺利。",
+        "工作顺利，步步高升。",
+        "学业进步。",
+        "前程似锦。",
+        "项目顺利上线。",
+        "灵感不断，创意满满。"
+    ]
+    let wishCount = 0
+    let wishText = document.getElementById("text")
+    let wishButton = document.getElementById("button")
+    let wishDisplay = document.getElementById("count")
+
+    function generateWish() {
+        wishCount = wishCount + 1
+        let randomIndex = Math.floor(Math.random() * wishes.length)
+        let selectedWish = wishes[randomIndex]
+        wishText.textContent = selectedWish
+        wishDisplay.textContent = "Wish Generated:" + wishCount
+    }
+    wishButton.addEventListener("click", generateWish)
+</script>
+
+</html>
