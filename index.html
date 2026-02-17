@@ -1,14 +1,44 @@
+</html>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>
-        "New Year Wish Generator"
-    </title>
+    <meta charset="UTF-8">
+    <title>Lunar New Year Wish Generator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 80px;
+            background-color: #fdf6f0;
+        }
+
+        h1 {
+            color: #ec226f;
+        }
+
+        #text {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #count {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Lunar New Year Wishes</h1>
+
+    <h1>🌸 Lunar New Year Wishes 🌸</h1>
 
     <div id="text">
         Generate your wishes here
@@ -21,33 +51,65 @@
     <div id="count">
         Wish Counter: 0
     </div>
-</body>
-<script>
-    let wishes = [
-        "Gallop into success this Year of the Horse!",
-        "Run bold. Run free. Happy New Year!",
-        "May luck race your way!",
-        "Speed, strength, and success to you!",
-        "Charge ahead and win big!",
-        "Let your dreams run wild!",
-        "Power through 2026 like a Horse!",
-        "Fast moves. Big wins.",
-        "May fortune ride with you!",
-        "Unstoppable energy all year long!"
-    ]
-    let wishCount = 0
-    let wishText = document.getElementById("text")
-    let wishButton = document.getElementById("button")
-    let wishDisplay = document.getElementById("count")
 
-    function generateWish() {
-        wishCount = wishCount + 1
-        let randomIndex = Math.floor(Math.random() * wishes.length)
-        let selectedWish = wishes[randomIndex]
-        wishText.textContent = selectedWish
-        wishDisplay.textContent = "Wish Generated:" + wishCount
-    }
-    wishButton.addEventListener("click", generateWish)
-</script>
+    <script>
+
+        // ===== DATA =====
+        let wishes = [
+            "Gallop into success this Year of the Horse!",
+            "Run bold. Run free. Happy New Year!",
+            "May luck race your way!",
+            "Speed, strength, and success to you!",
+            "Charge ahead and win big!",
+            "Let your dreams run wild!",
+            "Power through 2026 like a Horse!",
+            "Fast moves. Big wins.",
+            "May fortune ride with you!",
+            "Unstoppable energy all year long!"
+        ]
+
+        // ===== STATE (memory) =====
+        let wishCount = 0
+
+        // ===== DOM REFERENCES =====
+        let wishText = document.getElementById("text")
+        let wishButton = document.getElementById("button")
+        let wishDisplay = document.getElementById("count")
+
+        // ===== RESTORE FROM STORAGE =====
+        let savedCount = localStorage.getItem("wishCount")
+        let savedWish = localStorage.getItem("lastWish")
+
+        if (savedCount !== null) {
+            wishCount = Number(savedCount)
+            wishDisplay.textContent = "Wish Counter: " + wishCount
+        }
+
+        if (savedWish !== null) {
+            wishText.textContent = savedWish
+        }
+
+        // ===== FUNCTION =====
+        function generateWish() {
+
+            let randomIndex = Math.floor(Math.random() * wishes.length)
+            let selectedWish = wishes[randomIndex]
+
+            wishCount = wishCount + 1
+
+            wishText.textContent = selectedWish
+            wishDisplay.textContent = "Wish Counter: " + wishCount
+
+            // Save to persistent storage
+            localStorage.setItem("wishCount", wishCount)
+            localStorage.setItem("lastWish", selectedWish)
+        }
+
+        // ===== EVENT =====
+        wishButton.addEventListener("click", generateWish)
+
+    </script>
+
+</body>
 
 </html>
